@@ -1,6 +1,8 @@
 package com.parthiv.jpaTutorial.jpaTuts.repositories;
 
 import com.parthiv.jpaTutorial.jpaTuts.entities.ProductEntity;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
 
-    List<ProductEntity> findByTitle(String pepsi);
+    List<ProductEntity> findByTitleOrderByPrice(String title);
 
     List<ProductEntity> findByCreatedAtAfter(LocalDateTime after);
 
@@ -21,10 +23,18 @@ public interface ProductRepository extends JpaRepository <ProductEntity, Long> {
 
     List<ProductEntity> findByQuantityGreaterThanOrPriceLessThan(int i, BigDecimal bigDecimal);
 
+    List<ProductEntity> findByTitleContainingIgnoreCase(String title, Pageable pageable);
+
     Optional<ProductEntity> findByTitleIgnoreCaseAndPrice(String title, BigDecimal bigDecimal);
 
 //    Optional<ProductEntity> findByTitleAndPrice(String title, BigDecimal bigDecimal);
 
     @Query("select e from ProductEntity e where e.title=?1 and e.price=?2") //JPQL Custom Query
     Optional<ProductEntity> findByTitleAndPrice(String title, BigDecimal price);
+
+//    List<ProductEntity> findByOrderByPrice();
+
+    //Inorder to avoid creating multiple sort bys, use sort class
+
+    List<ProductEntity> findBy(Sort sort);
 }

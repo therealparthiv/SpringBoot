@@ -42,7 +42,7 @@ class JpaTutorialApplicationTests {
 
     @Test
     void getRepositoryByTitle(){
-        List<ProductEntity> entities= productRepository.findByTitle("Pepsi");
+        List<ProductEntity> entities= productRepository.findByTitleOrderByPrice("Pepsi");
         System.out.println(entities);
     }
     @Test
