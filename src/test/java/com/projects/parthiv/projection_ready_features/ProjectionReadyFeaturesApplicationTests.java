@@ -33,7 +33,7 @@ class ProjectionReadyFeaturesApplicationTests {
     @Test
     @Order(2)
     void getEmployeeByIdTest(){
-        EmployeeDTO employeeDTO= employeeClient.getEmployeeById(1L);
+        EmployeeDTO employeeDTO= employeeClient.getEmployeeById(9L);
         System.out.println(employeeDTO);;
     }
 
@@ -41,7 +41,7 @@ class ProjectionReadyFeaturesApplicationTests {
     @Order(1)
     void createNewEmployeeTest(){
         EmployeeDTO employeeDTO= new EmployeeDTO(null, "Parthiv", "parthiv@gmail.com",
-                2, "USER", 5000, LocalDate.of(2020, 12, 1), true);
+                21, "USER", 5000, LocalDate.of(2020, 12, 1), true);
         EmployeeDTO savedEmployeeDTO= employeeClient.createNewEmployee(employeeDTO);
         System.out.println(savedEmployeeDTO);
     }
